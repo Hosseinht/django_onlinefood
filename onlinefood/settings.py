@@ -46,9 +46,11 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     "debug_toolbar",
+    'django_cleanup.apps.CleanupConfig',
 
     # local app
     "users",
+    "profiles",
 ]
 
 MIDDLEWARE = [
