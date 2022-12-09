@@ -81,5 +81,4 @@ class AdminUser(UserAdmin):
     )
 
 
-
 admin.site.register(User, AdminUser)

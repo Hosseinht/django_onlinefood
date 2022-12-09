@@ -20,11 +20,6 @@ class Profile(models.Model):
     cover_photo = models.ImageField(
         upload_to=get_cover_photo_path, blank=True, null=True
     )
-    address_line_1 = models.CharField(max_length=100, null=True, blank=True)
-    address_line_2 = models.CharField(max_length=100, null=True, blank=True)
-    country = models.CharField(max_length=20, null=True, blank=True)
-    state = models.CharField(max_length=20, null=True, blank=True)
-    city = models.CharField(max_length=20, null=True, blank=True)
     phone_regex = RegexValidator(
         regex=r"^(\+\d{1,3})?,?\s?\d{8,13}",
         message="Phone number must not consist of space and requires country code. eg : +6591258565",
@@ -32,6 +27,11 @@ class Profile(models.Model):
     phone_number = models.CharField(
         max_length=13, validators=[phone_regex], null=True, blank=True
     )
+    address_line_1 = models.CharField(max_length=100, null=True, blank=True)
+    address_line_2 = models.CharField(max_length=100, null=True, blank=True)
+    country = models.CharField(max_length=20, null=True, blank=True)
+    state = models.CharField(max_length=20, null=True, blank=True)
+    city = models.CharField(max_length=20, null=True, blank=True)
     postal_code = models.CharField(max_length=6, null=True, blank=True)
     latitude = models.CharField(max_length=20, blank=True, null=True)
     longitude = models.CharField(max_length=20, blank=True, null=True)
