@@ -27,11 +27,26 @@ class RegisterUserView(generic.CreateView):
         return super(RegisterUserView, self).form_valid(form)
 
 
-def register_restaurant(request):
-    if request.method == "POST":
+class RegisterRestaurantView(generic.CreateView):
+    template_name = "users/register_restaurant.html"
+    form_class = UserRegistrationForm
+    second_form_class = RestaurantRegistrationForm
+
+    def get_success_url(self):
+        return reverse("users:register_restaurant")
+
+    def get_context_data(self, **kwargs):
+        context = super(RegisterRestaurantView, self).get_context_data(**kwargs)
+        if 'user_form' not in context:
+            context['user_form'] = self.form_class()
+        if 'restaurant_form' not in context:
+            context['restaurant_form'] = self.second_form_class()
+        return context
+
+    def post(self, request, *args, **kwargs):
         user_form = UserRegistrationForm(request.POST)
         restaurant_form = RestaurantRegistrationForm(request.POST, request.FILES)
-        # when we have a file we need to add request.FILES
+
         if user_form.is_valid() and restaurant_form.is_valid():
             password = user_form.cleaned_data["password"]
 
@@ -44,14 +59,4 @@ def register_restaurant(request):
             restaurant.user = user
             restaurant.save()
             messages.success(request, "Your account has been created successfully. Please wait for approval")
-            return redirect("users:register_restaurant")
-
-    else:
-        user_form = UserRegistrationForm()
-        restaurant_form = RestaurantRegistrationForm()
-
-    context = {
-        'user_form': user_form,
-        'restaurant_form': restaurant_form
-    }
-    return render(request, "users/register_restaurant.html", context)
+            return super(RegisterRestaurantView, self).post(self, request, *args, **kwargs)
