@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # local app
     "users",
     "profiles",
+    "restaurants",
 ]
 
 MIDDLEWARE = [

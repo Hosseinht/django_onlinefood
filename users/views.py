@@ -1,14 +1,17 @@
 from django.contrib import messages
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
 
 from .forms import UserRegistrationForm
 from .models import User
 
+from restaurants.forms import RestaurantRegistrationForm
+
 
 class RegisterUserView(generic.CreateView):
     form_class = UserRegistrationForm
-    template_name = "accounts/register_user.html"
+    template_name = "users/register_user.html"
 
     def get_success_url(self):
         return reverse("users:register_user")
@@ -22,3 +25,33 @@ class RegisterUserView(generic.CreateView):
         user.save()
         messages.success(self.request, "Your account has been created successfully")
         return super(RegisterUserView, self).form_valid(form)
+
+
+def register_restaurant(request):
+    if request.method == "POST":
+        user_form = UserRegistrationForm(request.POST)
+        restaurant_form = RestaurantRegistrationForm(request.POST, request.FILES)
+        # when we have a file we need to add request.FILES
+        if user_form.is_valid() and restaurant_form.is_valid():
+            password = user_form.cleaned_data["password"]
+
+            user = user_form.save(commit=False)
+            user.set_password(password)
+            user.role = User.RESTAURANT
+            user.save()
+
+            restaurant = restaurant_form.save(commit=False)
+            restaurant.user = user
+            restaurant.save()
+            messages.success(request, "Your account has been created successfully. Please wait for approval")
+            return redirect("users:register_restaurant")
+
+    else:
+        user_form = UserRegistrationForm()
+        restaurant_form = RestaurantRegistrationForm()
+
+    context = {
+        'user_form': user_form,
+        'restaurant_form': restaurant_form
+    }
+    return render(request, "users/register_restaurant.html", context)
