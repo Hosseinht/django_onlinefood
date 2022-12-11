@@ -1,12 +1,31 @@
-from django.contrib import messages
+from django.contrib import messages, auth
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
 
 from .forms import UserRegistrationForm
 from .models import User
+from .utils import detect_user
 
 from restaurants.forms import RestaurantRegistrationForm
+
+
+# restrict restaurant from accessing to the customer page
+def check_role_restaurant(user):
+    if user.role == 1:
+        return True
+    else:
+        raise PermissionDenied
+
+
+# restrict customer from accessing to the vendor page
+def check_role_customer(user):
+    if user.role == 2:
+        return True
+    else:
+        raise PermissionDenied
 
 
 class RegisterUserView(generic.CreateView):
@@ -15,6 +34,14 @@ class RegisterUserView(generic.CreateView):
 
     def get_success_url(self):
         return reverse("users:register_user")
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+           Authenticated user shouldn't see the User registration page
+        """
+        if request.user.is_authenticated:
+            return redirect('users:dashboard')
+        return super(RegisterUserView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         password = form.cleaned_data["password"]
@@ -34,6 +61,14 @@ class RegisterRestaurantView(generic.CreateView):
 
     def get_success_url(self):
         return reverse("users:register_restaurant")
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+            Authenticated user shouldn't see the Restaurant registration page
+        """
+        if request.user.is_authenticated:
+            return redirect('users:dashboard')
+        return super(RegisterRestaurantView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(RegisterRestaurantView, self).get_context_data(**kwargs)
@@ -60,3 +95,52 @@ class RegisterRestaurantView(generic.CreateView):
             restaurant.save()
             messages.success(request, "Your account has been created successfully. Please wait for approval")
             return super(RegisterRestaurantView, self).post(self, request, *args, **kwargs)
+
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('users:my_account')
+    elif request.method == "POST":
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = auth.authenticate(email=email, password=password)
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, "You are now logged in.")
+            return redirect('users:my_account')
+        else:
+            messages.error(request, "Invalid login credential")
+            return redirect('users:login')
+
+    return render(request, 'users/login.html')
+
+
+def logout(request):
+    auth.logout(request)
+    messages.info(request, 'You are logged out')
+    return redirect('users:login')
+
+
+@login_required(login_url='users:login')
+def my_account(request):
+    """
+        Redirect user based on the user role
+    """
+    user = request.user
+    redirect_url = detect_user(user)
+    return redirect(redirect_url)
+
+
+@login_required(login_url='users:login')
+@user_passes_test(check_role_customer)
+def customer_dashboard(request):
+    return render(request, 'users/customer_dashboard.html')
+
+
+@login_required(login_url='users:login')
+@user_passes_test(check_role_restaurant)
+def restaurant_dashboard(request):
+    return render(request, 'users/restaurant_dashboard.html')
+
+

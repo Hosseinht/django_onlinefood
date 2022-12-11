@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import environ
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
+from django.urls import reverse_lazy
 
 env = environ.Env(
     # set casting, default value
@@ -159,3 +161,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.User'
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    # messages.INFO: 'info',
+}
+
+LOGIN_REDIRECT_URL = reverse_lazy('users:dashboard')
