@@ -9,7 +9,7 @@ from django.db import models
 
 class UserManager(BaseUserManager):
     def create_user(
-            self, email, username, first_name, last_name, password, **extra_fields
+        self, email, username, first_name, last_name, password, **extra_fields
     ):
         if not email:
             raise ValueError("User must have an email address")
@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(
-            self, email, username, first_name, last_name, password, **extra_fields
+        self, email, username, first_name, last_name, password, **extra_fields
     ):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_admin", True)

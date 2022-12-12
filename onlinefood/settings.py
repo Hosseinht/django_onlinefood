@@ -167,4 +167,11 @@ MESSAGE_TAGS = {
     # messages.INFO: 'info',
 }
 
-LOGIN_REDIRECT_URL = reverse_lazy('users:dashboard')
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mydjangoproject87@gmail.com'
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = "OnlineFood"
