@@ -17,16 +17,16 @@ from .token import user_activation_token
 from .utils import detect_user, send_verification_email
 
 
-# restrict restaurant from accessing to the customer page
 def check_role_restaurant(user):
+    # restrict restaurant from accessing to the customer page
     if user.role == 1:
         return True
     else:
         raise PermissionDenied
 
 
-# restrict customer from accessing to the vendor page
 def check_role_customer(user):
+    # restrict customer from accessing to the vendor page
     if user.role == 2:
         return True
     else:
@@ -190,8 +190,4 @@ def restaurant_dashboard(request):
     """
     my_account function check the users and if the users was a restaurant, will be redirected here
     """
-    restaurant = Restaurant.objects.get(user=request.user)
-    context = {
-        'restaurant': restaurant
-    }
-    return render(request, "users/restaurant_dashboard.html", context)
+    return render(request, "users/restaurant_dashboard.html")
