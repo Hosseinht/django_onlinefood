@@ -44,7 +44,7 @@
             // unless overridden.
             autocomplete: {},
 
-            // Shows autocomplete before the user even types anything.
+            // Shows autocomplete before the users even types anything.
             showAutocompleteOnFocus: false,
 
             // When enabled, quotes are unneccesary for inputting multi-word tags.
@@ -64,7 +64,7 @@
             singleField: false,
 
             // This is just used when preloading data from the field, and for
-            // populating the field with delimited tags as the user adds them.
+            // populating the field with delimited tags as the users adds them.
             singleFieldDelimiter: ',',
 
             // Set this to an input DOM node to use an existing form field.
@@ -183,7 +183,7 @@
                             that._trigger('onTagClicked', e, {tag: tag, tagLabel: that.tagLabel(tag)});
                         }
                     } else {
-                        // Sets the focus() to the input field, if the user
+                        // Sets the focus() to the input field, if the users
                         // clicks anywhere inside the UL. This is needed
                         // because the input field needs to be of a small size.
                         that.tagInput.focus();

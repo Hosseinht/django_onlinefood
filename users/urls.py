@@ -1,13 +1,13 @@
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView, \
     PasswordResetCompleteView
-from django.urls import path, reverse_lazy
+from django.urls import path, reverse_lazy, include
 
 from . import views
 from users.forms import EmailValidationOnForgotPassword
 
 app_name = "users"
-
 urlpatterns = [
+    path("", views.my_account),
     path("registeruser/", views.RegisterUserView.as_view(), name="register_user"),
     path(
         "registerrestaurant/",
@@ -37,6 +37,10 @@ urlpatterns = [
         success_url=reverse_lazy("users:password_reset_complete")),
          name='password_reset_confirm'),
     path('password-reset-complete/', PasswordResetCompleteView.as_view(
-        template_name="users/passwordreset/password_reset_complete.html",
-    ), name='password_reset_complete'),
+        template_name="users/passwordreset/password_reset_complete.html"),
+         name='password_reset_complete'),
+
+    path('restaurant/', include('restaurants.urls')),
+    # path('restaurant/', views.restaurant_dashboard),
 ]
+

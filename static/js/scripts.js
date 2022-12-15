@@ -4078,7 +4078,7 @@
     moment.fn.millisecond = moment.fn.milliseconds = makeAccessor('Milliseconds', false);
     moment.fn.second = moment.fn.seconds = makeAccessor('Seconds', false);
     moment.fn.minute = moment.fn.minutes = makeAccessor('Minutes', false);
-    // Setting the hour should keep the time, because the user explicitly
+    // Setting the hour should keep the time, because the users explicitly
     // specified which hour he wants. So trying to maintain the same hour (in
     // a new timezone) makes sense. Adding/subtracting hours does not follow
     // this rule.
@@ -10742,7 +10742,7 @@
             yy : relativeTimeWithPlural
         },
 
-        // M. E.: those two are virtually unused but a user might want to implement them for his/her website for some reason
+        // M. E.: those two are virtually unused but a users might want to implement them for his/her website for some reason
 
         meridiemParse: /Ð½Ð¾Ñ‡Ñ–|Ñ€Ð°Ð½ÐºÑƒ|Ð´Ð½Ñ|Ð²ÐµÑ‡Ð¾Ñ€Ð°/,
         isPM: function (input) {
@@ -11354,44 +11354,44 @@ jQuery(document).ready(function () {
     });
     jQuery('.dashboard-review-reply-btn').click(function () {
         event.preventDefault();
-        jQuery('.dashbard-user-reviews-list').css("display", "none");;
+        jQuery('.dashbard-users-reviews-list').css("display", "none");;
         jQuery('.dashboard-add-new-review-holder.add-new-review-holder').css("display", "block");
     });
     jQuery('.close-post-new-reviews-btn').click(function () {
         event.preventDefault();
-        jQuery('.dashbard-user-reviews-list').css("display", "block");
+        jQuery('.dashbard-users-reviews-list').css("display", "block");
         jQuery('.dashboard-add-new-review-holder.add-new-review-holder').css("display", "none");
     });
 
 
 
-    jQuery(document).on("click", ".user-dashboard-menu > ul > li.user-dashboard-menu-children > a", function () {
+    jQuery(document).on("click", ".users-dashboard-menu > ul > li.users-dashboard-menu-children > a", function () {
         jQuery(this).parent().toggleClass('menu-open');
         jQuery(this).parent().siblings().removeClass('menu-open');
         setTimeout(function () {
-            jQuery('.user-dashboard-menu > ul > li.user-dashboard-menu-children > a').addClass('open-overlay');
+            jQuery('.users-dashboard-menu > ul > li.users-dashboard-menu-children > a').addClass('open-overlay');
         }, 2);
-        jQuery(".user-dashboard-menu > ul > li").append("<div class='location-overlay'></div>");
-        jQuery(".user-dashboard-menu > ul > li > ul").append("<i class='icon-cross3 close-menu-location'></i>");
+        jQuery(".users-dashboard-menu > ul > li").append("<div class='location-overlay'></div>");
+        jQuery(".users-dashboard-menu > ul > li > ul").append("<i class='icon-cross3 close-menu-location'></i>");
     });
-    jQuery(document).on("click", ".user-dashboard-menu > ul > li.user-dashboard-menu-children > a.open-overlay", function () {
+    jQuery(document).on("click", ".users-dashboard-menu > ul > li.users-dashboard-menu-children > a.open-overlay", function () {
         jQuery(".location-overlay").remove();
         jQuery(".close-menu-location").remove();
         setTimeout(function () {
-            jQuery('.user-dashboard-menu > ul > li.user-dashboard-menu-children > a').removeClass('open-overlay');
+            jQuery('.users-dashboard-menu > ul > li.users-dashboard-menu-children > a').removeClass('open-overlay');
         }, 2);
     });
     jQuery(document).on("click", ".location-overlay", function () {
         jQuery(this).closest(".location-overlay").remove();
         jQuery(".close-menu-location").remove();
-        jQuery('.user-dashboard-menu > ul > li.user-dashboard-menu-children').removeClass("menu-open");
-        jQuery('.user-dashboard-menu > ul > li.user-dashboard-menu-children > a').removeClass('open-overlay');
+        jQuery('.users-dashboard-menu > ul > li.users-dashboard-menu-children').removeClass("menu-open");
+        jQuery('.users-dashboard-menu > ul > li.users-dashboard-menu-children > a').removeClass('open-overlay');
     });
     jQuery(document).on("click", ".close-menu-location", function () {
         jQuery(this).closest(".close-menu-location").remove();
         jQuery(".location-overlay").remove();
-        jQuery('.user-dashboard-menu > ul > li.user-dashboard-menu-children').removeClass("menu-open");
-        jQuery('.user-dashboard-menu > ul > li.user-dashboard-menu-children > a').removeClass('open-overlay');
+        jQuery('.users-dashboard-menu > ul > li.users-dashboard-menu-children').removeClass("menu-open");
+        jQuery('.users-dashboard-menu > ul > li.users-dashboard-menu-children > a').removeClass('open-overlay');
     });
 
     /*

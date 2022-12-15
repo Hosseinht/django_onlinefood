@@ -9,6 +9,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import generic
 
 from restaurants.forms import RestaurantRegistrationForm
+from restaurants.models import Restaurant
 
 from .forms import UserRegistrationForm
 from .models import User
@@ -39,7 +40,7 @@ class RegisterUserView(generic.CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         """
-        Authenticated user shouldn't see the User registration page
+        Authenticated users shouldn't see the User registration page
         """
         if request.user.is_authenticated:
             return redirect("users:my_account")
@@ -53,7 +54,7 @@ class RegisterUserView(generic.CreateView):
         user.role = User.CUSTOMER
         user.save()
 
-        # send verification email to the user
+        # send verification email to the users
         send_verification_email(self.request, user)
 
         messages.success(
@@ -73,7 +74,7 @@ class RegisterRestaurantView(generic.CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         """
-        Authenticated user shouldn't see the Restaurant registration page
+        Authenticated users shouldn't see the Restaurant registration page
         """
         if request.user.is_authenticated:
             return redirect("users:dashboard")
@@ -103,7 +104,7 @@ class RegisterRestaurantView(generic.CreateView):
             restaurant.user = user
             restaurant.save()
 
-            # send verification email to the user
+            # send verification email to the users
             send_verification_email(self.request, user)
 
             messages.success(
@@ -116,7 +117,7 @@ class RegisterRestaurantView(generic.CreateView):
 
 
 def activate(request, uidb64, token):
-    # Activate the user by setting the is_active status to True
+    # Activate the users by setting the is_active status to True
 
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -167,7 +168,7 @@ def logout(request):
 @login_required(login_url="users:login")
 def my_account(request):
     """
-    Redirect user based on the user role
+    Redirect users based on the users role
     """
     user = request.user
     redirect_url = detect_user(user)
@@ -178,7 +179,7 @@ def my_account(request):
 @user_passes_test(check_role_customer)
 def customer_dashboard(request):
     """
-    my_account function check the user and if the user was a customer, will be redirected here
+    my_account function check the users and if the users was a customer, will be redirected here
     """
     return render(request, "users/customer_dashboard.html")
 
@@ -187,6 +188,10 @@ def customer_dashboard(request):
 @user_passes_test(check_role_restaurant)
 def restaurant_dashboard(request):
     """
-    my_account function check the user and if the user was a restaurant, will be redirected here
+    my_account function check the users and if the users was a restaurant, will be redirected here
     """
-    return render(request, "users/restaurant_dashboard.html")
+    restaurant = Restaurant.objects.get(user=request.user)
+    context = {
+        'restaurant': restaurant
+    }
+    return render(request, "users/restaurant_dashboard.html", context)

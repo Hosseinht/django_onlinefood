@@ -266,7 +266,7 @@ jQuery(document).ready(function () {
     /*Main Navigation Function EnD*/
     // dashboardMenu();
     // function dashboardMenu(){
-    //     var Height=jQuery(".user-dashboard-menu > ul").outerHeight();
+    //     var Height=jQuery(".users-dashboard-menu > ul").outerHeight();
     //     var winHeight=jQuery(window).height();
     //     if(winHeight < Height){
     //         console.log("alert");

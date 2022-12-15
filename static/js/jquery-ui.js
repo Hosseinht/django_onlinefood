@@ -6600,7 +6600,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			delayedTriggers = [];
 
 		// We first have to update the dom position of the actual currentItem
-		// Note: don't do it if the current item is already removed (by a user), or it gets
+		// Note: don't do it if the current item is already removed (by a users), or it gets
 		// reappended (see #4088)
 		if ( !this._noFinalSort && this.currentItem.parent().length ) {
 			this.placeholder.before( this.currentItem );
@@ -7999,7 +7999,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 //>>label: Autocomplete
 //>>group: Widgets
-//>>description: Lists suggested words as the user is typing.
+//>>description: Lists suggested words as the users is typing.
 //>>docs: http://api.jqueryui.com/autocomplete/
 //>>demos: http://jqueryui.com/autocomplete/
 //>>css.structure: ../../themes/base/core.css
@@ -8211,7 +8211,7 @@ $.widget( "ui.autocomplete", {
 					// Right clicking a menu item or selecting text from the menu items will
 					// result in focus moving out of the input. However, we've already received
 					// and ignored the blur event because of the cancelBlur flag set above. So
-					// we restore focus to ensure that the menu closes properly based on the user's
+					// we restore focus to ensure that the menu closes properly based on the users's
 					// next actions.
 					if ( this.element[ 0 ] !== $.ui.safeActiveElement( this.document[ 0 ] ) ) {
 						this.element.trigger( "focus" );
@@ -8391,7 +8391,7 @@ $.widget( "ui.autocomplete", {
 		clearTimeout( this.searching );
 		this.searching = this._delay( function() {
 
-			// Search if the value has changed, or if the user retypes the same value (see #7434)
+			// Search if the value has changed, or if the users retypes the same value (see #7434)
 			var equalValues = this.term === this._value(),
 				menuVisible = this.menu.element.is( ":visible" ),
 				modifierKey = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
@@ -11362,7 +11362,7 @@ $.extend( Datepicker.prototype, {
 						tbody += "<td class='" +
 							( ( dow + firstDay + 6 ) % 7 >= 5 ? " ui-datepicker-week-end" : "" ) + // highlight weekends
 							( otherMonth ? " ui-datepicker-other-month" : "" ) + // highlight days from other months
-							( ( printDate.getTime() === selectedDate.getTime() && drawMonth === inst.selectedMonth && inst._keyEvent ) || // user pressed key
+							( ( printDate.getTime() === selectedDate.getTime() && drawMonth === inst.selectedMonth && inst._keyEvent ) || // users pressed key
 							( defaultDate.getTime() === printDate.getTime() && defaultDate.getTime() === selectedDate.getTime() ) ?
 
 							// or defaultDate is current printedDate and defaultDate is selectedDate
@@ -12428,7 +12428,7 @@ $.widget( "ui.dialog", {
 
 	_size: function() {
 
-		// If the user has resized the dialog, the .ui-dialog and .ui-dialog-content
+		// If the users has resized the dialog, the .ui-dialog and .ui-dialog-content
 		// divs will both have width and height set, so we need to reset them
 		var nonContentHeight, minContentHeight, maxContentHeight,
 			options = this.options;
@@ -13568,7 +13568,7 @@ $.widget( "ui.spinner", {
 		"mousedown .ui-spinner-button": function( event ) {
 			var previous;
 
-			// We never want the buttons to have focus; whenever the user is
+			// We never want the buttons to have focus; whenever the users is
 			// interacting with the spinner, the focus should be on the input.
 			// If the input is focused then this.previous is properly set from
 			// when the input first received focus. If the input is not focused
@@ -13583,7 +13583,7 @@ $.widget( "ui.spinner", {
 
 					// support: IE
 					// IE sets focus asynchronously, so we need to check if focus
-					// moved off of the input because the user clicked on the button.
+					// moved off of the input because the users clicked on the button.
 					this._delay( function() {
 						this.previous = previous;
 					} );
@@ -14188,7 +14188,7 @@ $.widget( "ui.tabs", {
 		if ( !event.ctrlKey && !event.metaKey ) {
 
 			// Update aria-selected immediately so that AT think the tab is already selected.
-			// Otherwise AT may confuse the user by stating that they need to activate the tab,
+			// Otherwise AT may confuse the users by stating that they need to activate the tab,
 			// but the tab will already be activated by the time the announcement finishes.
 			focusedTab.attr( "aria-selected", "false" );
 			this.tabs.eq( selectedIndex ).attr( "aria-selected", "true" );

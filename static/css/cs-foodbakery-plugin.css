@@ -2831,7 +2831,7 @@
 /*icon Picker style End*/
 /*User DashBoard Input Style*/
 /* User Pages Style Start */
-/*user Dashboard Menu Style Start*/
+/*users Dashboard Menu Style Start*/
 .user-dashboard-menu > ul > li {
     margin: 0;
     list-style: none;
@@ -3268,7 +3268,7 @@
     display: block;
 }
 
-/*user Dashboard Menu Style End*/
+/*users Dashboard Menu Style End*/
 /* User Nav List Styel */
 .user-nav-list {
     background-color: #fff;
@@ -3466,7 +3466,7 @@
 }
 
 /* User Dashboard Styel */
-/* user-order */
+/* users-order */
 .user-dashboard {
     background-color: #fff;
     padding: 25px 30px 30px;
@@ -3711,7 +3711,7 @@
     padding: 5px 12px 5px;
 }
 
-/* user-order */
+/* users-order */
 /* User Account Nav Style Start */
 ul.dashboard-nav {
     margin: 0;

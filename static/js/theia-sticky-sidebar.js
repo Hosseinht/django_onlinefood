@@ -143,7 +143,7 @@
                     o.stickySidebarPaddingBottom = 1;
                 }
 
-                // We use this to know whether the user is scrolling up or down.
+                // We use this to know whether the users is scrolling up or down.
                 o.previousScrollTop = null;
 
                 // Scroll top (value) when the sidebar has fixed position.
@@ -177,7 +177,7 @@
                     var scrollTop = $(document).scrollTop();
                     var position = 'static';
 
-                    // If the user has scrolled down enough for the sidebar to be clipped at the top, then we can consider changing its position.
+                    // If the users has scrolled down enough for the sidebar to be clipped at the top, then we can consider changing its position.
                     if (scrollTop >= o.sidebar.offset().top + (o.paddingTop - o.options.additionalMarginTop)) {
                         // The top and bottom offsets, used in various calculations.
                         var offsetTop = o.paddingTop + options.additionalMarginTop;
@@ -220,10 +220,10 @@
                             top = windowOffsetBottom - o.stickySidebar.outerHeight();
                         }
 
-                        if (scrollTopDiff > 0) { // If the user is scrolling up.
+                        if (scrollTopDiff > 0) { // If the users is scrolling up.
                             top = Math.min(top, windowOffsetTop);
                         }
-                        else { // If the user is scrolling down.
+                        else { // If the users is scrolling down.
                             top = Math.max(top, windowOffsetBottom - o.stickySidebar.outerHeight());
                         }
 
