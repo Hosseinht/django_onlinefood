@@ -13,7 +13,9 @@ def get_cover_photo_path(profile, filename):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="profile"
+    )
     profile_picture = models.ImageField(
         upload_to=get_profile_picture_path, blank=True, null=True
     )
@@ -27,8 +29,7 @@ class Profile(models.Model):
     phone_number = models.CharField(
         max_length=13, validators=[phone_regex], null=True, blank=True
     )
-    address_line_1 = models.CharField(max_length=100, null=True, blank=True)
-    address_line_2 = models.CharField(max_length=100, null=True, blank=True)
+    address = models.CharField(max_length=300, null=True, blank=True)
     country = models.CharField(max_length=20, null=True, blank=True)
     state = models.CharField(max_length=20, null=True, blank=True)
     city = models.CharField(max_length=20, null=True, blank=True)
@@ -37,9 +38,6 @@ class Profile(models.Model):
     longitude = models.CharField(max_length=20, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-
-    def address(self):
-        return f"{self.address_line_1}, {self.address_line_2}"
 
     def __str__(self):
         return self.user.email

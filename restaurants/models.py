@@ -25,7 +25,7 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
-    @admin.display(ordering='user__first_name')
+    @admin.display(ordering="user__first_name")
     def user_name(self):
         return self.user.get_full_name
 
@@ -35,12 +35,14 @@ class Restaurant(models.Model):
             restaurant = Restaurant.objects.get(pk=self.pk)
             if restaurant.is_approved != self.is_approved:
                 mail_template = "users/emails/restaurant_approval.html"
-                context = {'users': self.user, 'is_approved': self.is_approved}
+                context = {"users": self.user, "is_approved": self.is_approved}
                 if self.is_approved:
                     mail_subject = "Congratulation! Your restaurant has been approved."
                     send_notification(mail_subject, mail_template, context)
                 else:
-                    mail_subject = "We are sorry! You are not eligible for publishing your food menu on our " \
-                                   "marketplace. "
+                    mail_subject = (
+                        "We are sorry! You are not eligible for publishing your food menu on our "
+                        "marketplace. "
+                    )
                     send_notification(mail_subject, mail_template, context)
         return super(Restaurant, self).save(*args, **kwargs)

@@ -1,6 +1,5 @@
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
@@ -9,7 +8,6 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import generic
 
 from restaurants.forms import RestaurantRegistrationForm
-from restaurants.models import Restaurant
 
 from .forms import UserRegistrationForm
 from .models import User

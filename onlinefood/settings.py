@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "users",
     "profiles",
     "restaurants",
+    "menus",
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "users.context_processors.get_restaurant"
+                "users.context_processors.get_restaurant",
+                "users.context_processors.get_google_api",
             ],
         },
     },
@@ -176,3 +178,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mydjangoproject87@gmail.com'
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = "OnlineFood"
+
+GOOGLE_API_KEY = env("GOOGLE_API_KEY")

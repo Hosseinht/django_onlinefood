@@ -71,14 +71,22 @@
                                             </li>
                                             <li>
                                                 <ul class="errorlist">
-                                                    {% for field in form %}
-                                                        {% if field.errors %}
-                                                            {% for error in field.errors %}
-                                                                <li style="color: red">{{ error }}</li>
+                                                    {% if form.errors %}
+                                                        <div class="alert alert-danger">
+                                                            {% for field in form %}
+                                                                {% for error in field.errors %}
+                                                                    <li>
+
+                                                                        <strong>{{ error|escape }}</strong>
+                                                                    </li>
+                                                                {% endfor %}
                                                             {% endfor %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                    <li style="color: red">{{ form.non_field_errors }}</li>
+
+                                                            <li>
+                                                                <strong>{{ form.non_field_errors }}</strong>
+                                                            </li>
+                                                        </div>
+                                                    {% endif %}
                                                 </ul>
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
