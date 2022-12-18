@@ -9,4 +9,5 @@ from . import views
 urlpatterns = [
     path("", restaurant_dashboard),
     path("profile/", views.restaurant_profile, name="restaurant_profile"),
+    path("menu-builder/", views.menu_builder, name="menu_builder"),
 ]
