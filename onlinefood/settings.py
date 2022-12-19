@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "users",
     "profiles",
     "restaurants",
-    "menus",
+    # "menus",
 ]
 
 MIDDLEWARE = [
